@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">    
+    <title>Indeed Scrape and Filter applet</title>
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+    <style>
+        .job-container {
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            padding: 15px;
+            margin-bottom: 20px;
+            transition: box-shadow 0.3s;
+        }
+        .job-container:hover {
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+        }
+    </style>
+</head>
+
+<body>
+
+    <div class="container">
+        <h1>Web Scraper with ChatGPT Integration</h1>
+        <form id="scrape-form">
+            <select id="website" name="website">
+                <option value="indeed">Indeed</option>
+                <option value="linkedin">Linkedin</option>
+            </select>
+            <input type="text" id="searchTerm" placeholder="Enter the terms you want to search for" value="Networking" required>
+            <input type="text" id="location" placeholder="Enter the location you are searching in" value="Burnaby" required>
+            <input type="text" id="query" placeholder="Query">
+            <button type="submit">Search</button>
+
+
+        </form>
+        <div id="results"></div>
+        <form id="chatgpt-form" style="display:none;">
+            <input type="text" id="query" name="query" placeholder="Enter Query for ChatGPT" required>
+            <button type="submit">Process with ChatGPT</button>
+        </form>
+        <div id="chatgpt-response"></div>
+    </div>
+
+
+    <div class="container mt-5">
+        <h1 class="text-center">Job Listings</h1>
+        <div class="row">
+           {% for job in jobs %}
+            <div class="col-md-4">
+                <div class="job-container">
+                    <h5 class="job-title">{{ job.title }}</h5>
+                    <p class="company">{{job.company}}</p>
+                    <p class="location">{{job.location}}</p>
+                    <p class="wage">{{job.wage}}</p>
+                </div>
+            </div>
+           {% endfor %}
+        </div>
+    </div>
+
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.0.7/dist/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
